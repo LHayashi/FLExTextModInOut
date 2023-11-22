@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<FxtDocumentDescription dataLabel="FLExTextModInOut" formatLabel="FLEXTEXT" defaultExtension="flextext" filter="FLExText files (*.flextext)|*.flextext|XML files (*.xml)|*.xml|All files (*.*)|*.*" mode="applySingleTransform" transform="FLExTextModInOut.xsl">
+<FxtDocumentDescription dataLabel="FLExTextModInOut" formatLabel="FLEXTEXT" defaultExtension="flextext" filter="FLExText files (*.flextext)|*.flextext|XML files (*.xml)|*.xml|All files (*.*)|*.*" mode="applySingleTransform" transform="xml2FLExTextModInOut.xsl">
 Similar to standard FLExText export except that it includes in and out media file offsets captured as Note \in and \out (format seconds with decimals as needed). First segment should also have \sf soundfilename. 
 Note \sf soundfile.wav \in 3.2030 \out 4.5070
  </FxtDocumentDescription>
