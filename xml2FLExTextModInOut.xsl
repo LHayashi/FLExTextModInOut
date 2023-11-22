@@ -24,12 +24,12 @@
 			<xsl:if test="starts-with(item[@type = 'note'], '\in ')">
 				<xsl:attribute name="begin-time-offset">
 					<xsl:value-of
-						select="normalize-space(substring-before(substring-after(item[@type = 'note'], '\in '), '\out'))"
+						select="number(normalize-space(substring-before(substring-after(item[@type = 'note'], '\in '), '\out')))*1000"
 					/>
 				</xsl:attribute>
 				<xsl:attribute name="end-time-offset">
 					<xsl:value-of
-						select="normalize-space(substring-before(substring-after(concat(item[@type = 'note'], '\'), '\out '), '\'))"
+						select="number(normalize-space(substring-before(substring-after(concat(item[@type = 'note'], '\'), '\out '), '\')))*1000"
 					/>
 				</xsl:attribute>
 			</xsl:if>
