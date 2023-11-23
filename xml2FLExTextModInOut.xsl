@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	exclude-result-prefixes="xs" version="2.0">
 	<xsl:output method="xml" encoding="UTF-8" indent="yes"/>
-	<!-- Larry Hayashi November 13 2023 -->
+	<!-- Larry Hayashi November 22 2023 -->
 
 	<xsl:template match="phrase">
+		<!-- vPOS stores the position of the current phrase among phrases-->
 		<xsl:variable name="vPOS">
 			<xsl:number count="phrase" level="any" format="1"/>
 		</xsl:variable>
@@ -20,20 +21,22 @@
 				so this transform copies the Notes over any existing data in these offsets.-->
 			<!--If for some reason there are no Notes that begin with \in but there are @begin-time-offset and end-time-offset
 				then create a Note with those offsets stored as \in, \out and \sf.-->
+			<!-- Floor() rounds down to nearest integer.-->
 
 			<xsl:if test="starts-with(item[@type = 'note'], '\in ')">
 				<xsl:attribute name="begin-time-offset">
 					<xsl:value-of
-						select="number(normalize-space(substring-before(substring-after(item[@type = 'note'], '\in '), '\out')))*1000"
+						select="floor(number(normalize-space(substring-before(substring-after(item[@type = 'note'], '\in '), '\out')))*1000)"
 					/>
 				</xsl:attribute>
 				<xsl:attribute name="end-time-offset">
 					<xsl:value-of
-						select="number(normalize-space(substring-before(substring-after(concat(item[@type = 'note'], '\'), '\out '), '\')))*1000"
+						select="floor(number(normalize-space(substring-before(substring-after(concat(item[@type = 'note'], '\'), '\out '), '\')))*1000)"
 					/>
 				</xsl:attribute>
 			</xsl:if>
 			<xsl:if test="contains(item[@type = 'note'], '\sf ')">
+				<xsl:variable name="vMediaFileGUID" select="fn:uuid()"/>
 				<xsl:attribute name="media-file">
 					<xsl:value-of
 						select="normalize-space(substring-before(substring-after(concat(item[@type = 'note'], '\'), '\sf '), '\'))"
@@ -64,9 +67,9 @@
 			<xsl:if test="not(starts-with(item[@type = 'note'], '\in '))">
 				<item type="note" lang="en">
 					<xsl:text>\in </xsl:text>
-					<xsl:value-of select="@begin-time-offset"/>
+					<xsl:value-of select="@begin-time-offset/1000"/>
 					<xsl:text> \out </xsl:text>
-					<xsl:value-of select="@end-time-offset"/>
+					<xsl:value-of select="@end-time-offset/1000"/>
 					<xsl:if test="$vPOS = 1">
 						<xsl:text> \sf </xsl:text>
 						<xsl:value-of select="//media[@guid = $vMediaFileGUID]/@location"/>
