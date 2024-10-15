@@ -1,5 +1,8 @@
 This is a repo for some ongoing work to create richer FLExText export including audio offsets and meta-data from the Notebook records that own Interlinear Texts.
 
+# Flow chart of processes
+https://www.canva.com/design/DAGTm3neQH0/U3QD6c9UA23iSqk1PVurig/view?utm_content=DAGTm3neQH0&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
 # FLExTextModInOut
 Transforms for adding begin and end offsets as a custom field "InOut" in FieldWorks/FLEx interlinear
 Both of these files need to be copied to C:\Program Files\SIL\FieldWorks 9\Language Explorer\Export Templates\Interlinear.
