@@ -232,7 +232,7 @@
 		<xsl:variable name="vPhraseNumber" select="item[@type='segnum']/."/>
 		<xsl:variable name="vAlphabet" select="'abcdefghijklmnopqrstuvwxyz'"/>
 		<xsl:variable name="vIndex" select="number($vPhraseNumber)"/>
-		<!-- Calculate the phrase letter -->
+		<!-- Calculate the phrase letter a, b, c ... z, aa, ab, ac ... az, ba, bb, bc ... etc.-->
 		<xsl:variable name="vPhraseLetter">
 			<xsl:choose>
 				<xsl:when test="$vIndex le 26">
@@ -241,7 +241,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<!-- Repeated letter (second cycle through the alphabet) -->
-					<xsl:value-of select="substring($vAlphabet, (($vIndex - 1) mod 26) + 1, 1)"/>
+					<xsl:value-of select="substring($vAlphabet, floor((($vIndex - 1) div 26) - 1) + 1, 1)"/>
 					<xsl:value-of select="substring($vAlphabet, (($vIndex - 1) mod 26) + 1, 1)"/>
 				</xsl:otherwise>
 			</xsl:choose>

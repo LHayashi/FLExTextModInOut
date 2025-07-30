@@ -143,8 +143,11 @@
 									<xsl:attribute name="size">
 										<xsl:value-of select="document(concat('file:///',$pAbsolutePathToAppDataFolder,'\audio\audio_report.xml'))//File[@Name=$vMediaFileName]/SizeBytes"/>
 									</xsl:attribute>
-									<xsl:value-of
+									<!--<xsl:value-of
 										select="concat($pAbsolutePathToAppDataFolder, '\_audio\', $vMediaFileName)"
+									/>-->
+									<xsl:value-of
+										select="$vMediaFileName"
 									/>
 								</filename>
 								<timing-filename>
@@ -159,8 +162,11 @@
 									<xsl:attribute name="size">
 										<xsl:value-of select="document(concat('file:///',$pAbsolutePathToAppDataFolder,'\audio\audio_report.xml'))//File[@Name=$vMediaFileName]/SizeBytes"/>
 									</xsl:attribute>
-									<xsl:value-of
+									<!--<xsl:value-of
 										select="concat($pAbsolutePathToAppDataFolder, '\_audio\', $vMediaFileName)"
+									/>-->
+									<xsl:value-of
+										select="$vMediaFileName"
 									/>
 								</filename>
 								<timing-filename>
